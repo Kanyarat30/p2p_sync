@@ -171,28 +171,29 @@ if __name__ == "__main__":  #นี่เป็นการตรวจสอบ
     node.start()    #เริ่มการทำงานของโหนด
     
     while True:
-        print("\n1. Connect to a peer")
-        print("2. Create a transaction")
-        print("3. View all transactions")
-        print("4. View my wallet address")
-        print("5. Exit")
-        choice = input("Enter your choice: ")
+        print("\n1. Connect to a peer") #แสดงข้อความ "1. Connect to a peer" ซึ่งเป็นตัวเลือกแรกในเมนู
+        print("2. Create a transaction")    #แสดงข้อความ "2. Create a transaction" ซึ่งเป็นตัวเลือกที่สองในเมนู
+        print("3. View all transactions")   #แสดงข้อความ "3. View all transactions" ซึ่งเป็นตัวเลือกที่สามในเมนู
+        print("4. View my wallet address")  #แสดงข้อความ "4. View my wallet address" ซึ่งเป็นตัวเลือกที่สี่ในเมนู
+        print("5. Exit")    #แสดงข้อความ "5. Exit" ซึ่งเป็นตัวเลือกสุดท้ายในเมนู สำหรับออกจากโปรแกรม
+        choice = input("Enter your choice: ")   #แสดงข้อความ "Enter your choice: " เพื่อให้ผู้ใช้ทราบว่าต้องป้อนตัวเลือก
         
-        if choice == '1':   # เชื่อมต่อกับ peer
+        if choice == '1':   # ตรวจสอบว่าผู้ใช้เลือกตัวเลือกที่ 1 หรือไม่ ถ้าใช่ จะดำเนินการเชื่อมต่อกับ peer
+            #รับ host และ port ของ peer ที่ต้องการเชื่อมต่อจากผู้ใช้ แปลง port เป็นตัวเลขด้วย int()
             peer_host = input("Enter peer host to connect: ")
             peer_port = int(input("Enter peer port to connect: "))
-            node.connect_to_peer(peer_host, peer_port)
-        elif choice == '2': # สร้างธุรกรรมใหม่
-            recipient = input("Enter recipient wallet address: ")
-            amount = float(input("Enter amount: "))
-            node.create_transaction(recipient, amount)
-        elif choice == '3': # แสดงธุรกรรมทั้งหมด
-            print("All transactions:")
-            for tx in node.transactions:
-                print(tx)
-        elif choice == '4': #แสดง wallet address
-            print(f"Your wallet address is: {node.wallet_address}")
-        elif choice == '5':
+            node.connect_to_peer(peer_host, peer_port)  #เรียกใช้ฟังก์ชัน connect_to_peer() ของ object node เพื่อทำการเชื่อมต่อ
+        elif choice == '2': # ตรวจสอบว่าผู้ใช้เลือกตัวเลือกที่ 2 หรือไม่ ถ้าใช่ จะดำเนินการสร้างธุรกรรมใหม่
+            recipient = input("Enter recipient wallet address: ")   #รับที่อยู่กระเป๋าเงินของผู้รับและจำนวนเงินจากผู้ใช้
+            amount = float(input("Enter amount: ")) #แปลงจำนวนเงินเป็นทศนิยมด้วย float()
+            node.create_transaction(recipient, amount)  #เรียกใช้ฟังก์ชัน create_transaction() เพื่อสร้างธุรกรรม
+        elif choice == '3': # ตรวจสอบว่าผู้ใช้เลือกตัวเลือกที่ 3 หรือไม่ ถ้าใช่ จะแสดงธุรกรรมทั้งหมด
+            print("All transactions:")  #แสดงข้อความ "All transactions:"
+            for tx in node.transactions:    #วนลูปผ่านทุกธุรกรรมใน node.transactions
+                print(tx)   #พิมพ์แต่ละธุรกรรม
+        elif choice == '4': #ตรวจสอบว่าผู้ใช้เลือกตัวเลือกที่ 4 หรือไม่ ถ้าใช่ จะแสดงที่อยู่กระเป๋าเงิน
+            print(f"Your wallet address is: {node.wallet_address}") #แสดงที่อยู่กระเป๋าเงินของผู้ใช้ โดยใช้ f-string
+        elif choice == '5': #ถ้าผู้ใช้เลือก 5 จะออกจากลูป
             break
         else:
             print("Invalid choice. Please try again.")  #ถ้าเลือกตัวเลือกที่ไม่มี จะแสดงข้อความแจ้งเตือน
